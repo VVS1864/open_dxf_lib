@@ -1,3 +1,4 @@
+package core;
 
 
 import java.util.HashMap;
@@ -12,6 +13,9 @@ public class Color_dxf extends Color_rgb{
 		
 	}
 	
+	public Color_dxf(Color_rgb c) {
+		this(c.r, c.g, c.b);
+	}
 	//public static int get_dxf_color(int r, int g, int b){
 		
 	//}

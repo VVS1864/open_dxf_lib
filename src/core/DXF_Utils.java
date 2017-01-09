@@ -1,3 +1,4 @@
+package core;
 
 
 import java.io.IOException;
@@ -12,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class DXF_Utils {
 
-	static String readFile(String path, Charset encoding){
+	public static String readFile(String path, Charset encoding){
 
 		try	{
 			byte[] encoded = Files.readAllBytes(Paths.get(path));
@@ -25,7 +26,7 @@ public class DXF_Utils {
 	}
 	
 	
-	static String replace_values(HashMap<String, String> values, String str){
+	public static String replace_values(HashMap<String, String> values, String str){
 		String patternString = "%(" + StringUtils.join(values.keySet(), "|") + ")%";
 		Pattern pattern = Pattern.compile(patternString);
 		Matcher matcher = pattern.matcher(str);

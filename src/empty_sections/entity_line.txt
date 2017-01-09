@@ -1,0 +1,32 @@
+LINE
+  5
+%handle%
+330
+1F
+100
+AcDbEntity
+  8
+0
+  6
+%dash%
+ 62
+  %color%
+ 48
+%factor%
+370
+   %width%
+100
+AcDbLine
+ 10
+%x1%
+ 20
+%y1%
+ 30
+0.0
+ 11
+%x2%
+ 21
+%y2%
+ 31
+0.0
+ 0

@@ -1,3 +1,4 @@
+package core;
 
 
 public class Color_rgb {

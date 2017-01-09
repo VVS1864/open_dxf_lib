@@ -1,15 +1,16 @@
+package core;
 
 
 
 public class Section_HEADER extends Section {
 	
-	String MY_HANDSEED;
+	public String MY_HANDSEED;
 	
 	public Section_HEADER(){
 		section_name = "SECTION_HEADER.txt";
-		super.init();
+		body = super.init();
 		
-		MY_HANDSEED = Integer.toHexString(110000);
+		MY_HANDSEED = Integer.toHexString(110000).toUpperCase();
 		
 	}
 	

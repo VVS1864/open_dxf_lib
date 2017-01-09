@@ -1,17 +1,18 @@
+package core;
 
 
 public class Section_TABLES extends Section {
 	
-	String MY_BLOCK_RECORDS = "";
-	String MY_BLKREFS = "";
-	String MY_ACAD_REACTORS = "";
+	public String MY_BLOCK_RECORDS = "";
+	public String MY_BLKREFS = "";
+	public String MY_ACAD_REACTORS = "";
 	
 	public Section_TABLES() {
 		section_name = "SECTION_TABLES.txt";
-		super.init();		
+		body = super.init();		
 	}
 	@Override
-	String to_string() {
+	public String to_string() {
 		values.put("MY_BLOCK_RECORDS\n", MY_BLOCK_RECORDS);
 		values.put("MY_BLKREFS\n", MY_BLKREFS);
 		values.put("MY_ACAD_REACTORS", MY_ACAD_REACTORS);

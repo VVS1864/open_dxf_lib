@@ -1,14 +1,15 @@
+package core;
 
 
 public class Section_CLASSES extends Section {
 	
 	public Section_CLASSES() {
 		section_name = "SECTION_CLASSES.txt";
-		super.init();
+		body = super.init();
 	}
 	
 	@Override
-	String to_string() {
+	public String to_string() {
 		
 		return body;
 	}
