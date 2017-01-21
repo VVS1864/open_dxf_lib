@@ -2,6 +2,7 @@ package core;
 
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -24,7 +25,7 @@ public class DXF_file {
 	Section_ENTITIES SECTION_ENTITIES = new Section_ENTITIES();
 	Section_OBJECTS SECTION_OBJECTS = new Section_OBJECTS();
 	
-	HashMap<Integer, Color_rgb> dxf_rgb_color_map = new HashMap<>();
+	public static HashMap<Integer, Color_rgb> dxf_rgb_color_map = new HashMap<>();
 	
 	public String file;
 	public Mode mode;
@@ -92,9 +93,11 @@ public class DXF_file {
 	 * Method for load data of colors dxf-rgb from file to HashMap
 	 */
 	void load_dxf_colors(){
-		String textLocation = "/color_acad_rgb.txt";
-		URL path = Object.class.getResource(textLocation);
-		String path2 = path.getPath();
+		String textLocation = "src/color_acad_rgb.txt";
+		//URL path = Object.class.getResource(textLocation);
+		//String path2 = path.getPath();
+		File file = new File(textLocation);
+		String path2 = file.getAbsolutePath();
 		Path path3 = Paths.get(path2);
 		
 		List<String> stringList;
@@ -122,7 +125,8 @@ public class DXF_file {
 	public static void main(String[] args){
 		String path = "/home/vlad/cad111.dxf";
 		DXF_file f = new DXF_file(Mode.New_file, path);
-		//System.out.println(f.dxf_rgb_color_map.get(160).get_rgb_string());
-		f.save_file();
+		Color_dxf c = new Color_dxf(122,68,65);
+		System.out.println(c.dxf_color + "  " + c.get_rgb_string());
+		//f.save_file();
 	}
 }
