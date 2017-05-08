@@ -14,7 +14,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import put_in_dxf.Put_line;
+import put_in_dxf.DXF_line;
+import core.dash_type;
 
 public class DXF_file {
 
@@ -30,7 +31,7 @@ public class DXF_file {
 	public String file;
 	public Mode mode;
 	
-	public String hex_handle = "BA";
+	public static String hex_handle = "BA";
 	public int int_handle = Integer.parseInt(hex_handle, 16);
 
 	public DXF_file(Mode key, String file) {
@@ -46,20 +47,21 @@ public class DXF_file {
 			double y2, 
 			dash_type dash, 
 			double factor,
-			Color_rgb color
+			Color_rgb color,
+			int width
 			){
 		next_handle();
-		String line = new Put_line(x1, y1, x2, y2, dash, factor, color).dxf_line;
+		String line = new DXF_line(x1, y1, x2, y2, dash, factor, color, width).dxf_line;
 		SECTION_ENTITIES.MY_ENTITIES += (line + "\n");
 	}
 	
 	
 	void save_file() {
-		String DXF = SECTION_HEADER.to_string();
-		DXF += SECTION_CLASSES.to_string();
-		DXF += SECTION_TABLES.to_string();
-		DXF += SECTION_BLOCKS.to_string();
-		DXF += SECTION_ENTITIES.to_string();
+		String DXF = (SECTION_HEADER.to_string() + "\n");
+		DXF += (SECTION_CLASSES.to_string() + "\n");
+		DXF += (SECTION_TABLES.to_string() + "\n");
+		DXF += (SECTION_BLOCKS.to_string() + "\n");
+		DXF += (SECTION_ENTITIES.to_string() + "\n");
 		DXF += SECTION_OBJECTS.to_string();
 
 		Path newFile = Paths.get(file);
@@ -125,8 +127,10 @@ public class DXF_file {
 	public static void main(String[] args){
 		String path = "/home/vlad/cad111.dxf";
 		DXF_file f = new DXF_file(Mode.New_file, path);
-		Color_dxf c = new Color_dxf(122,68,65);
-		System.out.println(c.dxf_color + "  " + c.get_rgb_string());
-		//f.save_file();
+		Color_dxf c = new Color_dxf(76,0,0);
+		f.put_line(0, 300, 100, 50, core.dash_type.Continuous, 20, c, 1);
+		f.put_line(250, 300, 150, 50, core.dash_type.Continuous, 20, c, 4);
+		//System.out.println(c.dxf_color + "  " + c.get_rgb_string());
+		f.save_file();
 	}
 }

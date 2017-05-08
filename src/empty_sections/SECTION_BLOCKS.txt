@@ -120,6 +120,5 @@ AcDbEntity
 0
 100
 AcDbBlockEnd
-  0
-MY_BLOCKS
+  0%MY_BLOCKS%
 ENDSEC

@@ -606,8 +606,7 @@ AcDbBlockTableRecord
 *Paper_Space0
 340
 26
-  0
-%MY_BLOCK_RECORDS%
+  0%MY_BLOCK_RECORDS%
 ENDTAB
   0
 ENDSEC

@@ -4,6 +4,7 @@ package core;
 public class Section_BLOCKS extends Section {
 	
 	public String MY_BLOCKS = "";
+	public String MY_BLOCK_RECORDS = "";
 	
 	public Section_BLOCKS() {
 		section_name = "SECTION_BLOCKS.txt";
@@ -13,7 +14,7 @@ public class Section_BLOCKS extends Section {
 	
 	@Override
 	public String to_string() {
-		values.put("MY_BLOCK_RECORDS\n", MY_BLOCKS);
+		values.put("MY_BLOCKS", MY_BLOCKS);
 		return DXF_Utils.replace_values(values, body);
 	}
 

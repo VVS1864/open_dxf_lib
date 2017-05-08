@@ -47,6 +47,10 @@ public class Color_dxf extends Color_rgb{
 		return dxf_color;
 	}
 	
+	public String get_dxf_color_string(){
+		return Integer.toString(dxf_color);
+	}
+	
 	
 	
 }
