@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 import put_in_dxf.DXF_line;
 import put_in_dxf.DXF_arc;
 import put_in_dxf.DXF_circle;
+import put_in_dxf.DXF_text;
 import core.dash_type;
 
 public class DXF_file {
@@ -63,6 +64,12 @@ public class DXF_file {
 	public void put_arc(double x1, double y1, double R, double start, double extent, Color_rgb color, int width) {
 
 		String entity = new DXF_arc(x1, y1, R, start, extent, color, width).dxf_entity;
+		put_base(entity);
+	}
+	
+	public void put_text(double x1, double y1, double text_size, double angle, double text_ss, Color_rgb color, String text) {
+
+		String entity = new DXF_text(x1, y1, text_size, angle, text_ss, color, text).dxf_entity;
 		put_base(entity);
 	}
 	
@@ -138,11 +145,10 @@ public class DXF_file {
 		String path = "/home/vlad/cad111.dxf";
 		DXF_file f = new DXF_file(Mode.New_file, path);
 		Color_dxf c = new Color_dxf(76,0,0);
-		f.put_line(0, 300, 100, 50, core.dash_type.Continuous, 20, c, 1);
+		f.put_text(100, 50, 450, 0, 0.5, c, "Samocad - v0.0.9.0");
 		f.put_arc(250, 300, 50, 120, 360, c, 4);
 		//f.put_circle(250, 300, 50, c, 4);
 		f.put_line(0, 320, 100, 50, core.dash_type.Continuous, 20, c, 1);
-		//System.out.println(c.dxf_color + "  " + c.get_rgb_string());
 		f.save_file();
 	}
 }
