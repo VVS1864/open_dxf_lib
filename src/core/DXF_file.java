@@ -4,7 +4,7 @@ package core;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,6 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import put_in_dxf.DXF_line;
+import put_in_dxf.DXF_arc;
 import put_in_dxf.DXF_circle;
 import core.dash_type;
 
@@ -32,7 +33,7 @@ public class DXF_file {
 	public String file;
 	public Mode mode;
 	
-	public static String hex_handle = "BA";
+	public static String hex_handle = "BB";
 	public int int_handle = Integer.parseInt(hex_handle, 16);
 
 	public DXF_file(Mode key, String file) {
@@ -41,33 +42,29 @@ public class DXF_file {
 		this.mode = key;
 	}
 	
-	public void put_line(
-			double x1, 
-			double y1, 
-			double x2, 
-			double y2, 
-			dash_type dash, 
-			double factor,
-			Color_rgb color,
-			int width
-			){
+	public void put_base(String entity) {
 		next_handle();
+		SECTION_ENTITIES.MY_ENTITIES += (entity + "\n");
+	}
+
+	public void put_line(double x1, double y1, double x2, double y2, dash_type dash, double factor, Color_rgb color,
+			int width) {
+
 		String entity = new DXF_line(x1, y1, x2, y2, dash, factor, color, width).dxf_entity;
-		SECTION_ENTITIES.MY_ENTITIES += (entity + "\n");
+		put_base(entity);
 	}
-	
-	public void put_circle(
-			double x1, 
-			double y1, 
-			double R, 
-			Color_rgb color,
-			int width
-			){
-		next_handle();
+
+	public void put_circle(double x1, double y1, double R, Color_rgb color, int width) {
+
 		String entity = new DXF_circle(x1, y1, R, color, width).dxf_entity;
-		SECTION_ENTITIES.MY_ENTITIES += (entity + "\n");
+		put_base(entity);
 	}
-	
+
+	public void put_arc(double x1, double y1, double R, double start, double extent, Color_rgb color, int width) {
+
+		String entity = new DXF_arc(x1, y1, R, start, extent, color, width).dxf_entity;
+		put_base(entity);
+	}
 	
 	void save_file() {
 		String DXF = (SECTION_HEADER.to_string() + "\n");
@@ -99,7 +96,6 @@ public class DXF_file {
 		int_handle += 1;
 		hex_handle = Integer.toHexString(int_handle).toUpperCase();		
 		if (hex_handle.equals("BD") || hex_handle.equals("105")){
-			System.out.println(hex_handle);
 			int_handle += 1;
 			hex_handle = Integer.toHexString(int_handle).toUpperCase();
 		}
@@ -143,8 +139,9 @@ public class DXF_file {
 		DXF_file f = new DXF_file(Mode.New_file, path);
 		Color_dxf c = new Color_dxf(76,0,0);
 		f.put_line(0, 300, 100, 50, core.dash_type.Continuous, 20, c, 1);
-		f.put_circle(250, 300, 50, c, 4);
-		f.put_line(0, 300, 100, 50, core.dash_type.Continuous, 20, c, 1);
+		f.put_arc(250, 300, 50, 120, 360, c, 4);
+		//f.put_circle(250, 300, 50, c, 4);
+		f.put_line(0, 320, 100, 50, core.dash_type.Continuous, 20, c, 1);
 		//System.out.println(c.dxf_color + "  " + c.get_rgb_string());
 		f.save_file();
 	}

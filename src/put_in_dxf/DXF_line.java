@@ -21,14 +21,14 @@ public class DXF_line extends Section {
 		Color_dxf color_dxf = new Color_dxf(color_rgb);
 		Width width_dxf = new Width(width);
 		values.put("handle", core.DXF_file.hex_handle);
+		values.put("color", color_dxf.get_dxf_color_string());
+		values.put("width", width_dxf.get_dxf_with_string());
 		values.put("x1", Double.toString(x1));
 		values.put("y1", Double.toString(y1));
 		values.put("x2", Double.toString(x2));
 		values.put("y2", Double.toString(y2));
 		values.put("dash", dash.toString());
 		values.put("factor", Double.toString(factor));
-		values.put("color", color_dxf.get_dxf_color_string());
-		values.put("width", width_dxf.get_dxf_with_string());
 		dxf_entity = DXF_Utils.replace_values(values, body);
 	}
 
