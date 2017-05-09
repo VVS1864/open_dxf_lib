@@ -1,0 +1,68 @@
+BLOCK
+  5
+%handle_block_dim_oblique%
+330
+%handle_block_record_dim_oblique%
+100
+AcDbEntity
+  8
+0
+100
+AcDbBlockBegin
+  2
+_OBLIQUE
+ 70
+     0
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+  3
+_OBLIQUE
+  1
+_OBLIQUE
+  0
+LINE
+  5
+%handle_oblique_line%
+330
+%handle_block_record_dim_oblique%
+100
+AcDbEntity
+  8
+0
+  6
+ByBlock
+ 62
+     0
+370
+    -2
+100
+AcDbLine
+ 10
+-0.5
+ 20
+-0.5
+ 30
+0.0
+ 11
+0.5
+ 21
+0.5
+ 31
+0.0
+  0
+ENDBLK
+  5
+%handle_endblock_dim_oblique%
+330
+%handle_block_record_dim_oblique%
+100
+AcDbEntity
+  8
+0
+100
+AcDbBlockEnd
+0

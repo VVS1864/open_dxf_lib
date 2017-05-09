@@ -1,0 +1,35 @@
+MTEXT
+  5
+%handle_block_dim_mtext%
+330
+%handle_block_records_dim%
+100
+AcDbEntity
+  8
+0
+ 62
+     0
+100
+AcDbMText
+ 10
+%text_xx%
+ 20
+%text_yy%
+ 30
+0.0
+ 40
+%dim_text_size%
+ 41
+0.0
+ 71
+     5
+ 72
+     1
+  1
+%dim_distanse%
+%MY_TEXT_ROTATE%
+ 73
+     1
+ 44
+1.0
+  0

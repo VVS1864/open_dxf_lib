@@ -4,7 +4,6 @@ package core;
 public class Section_BLOCKS extends Section {
 	
 	public String MY_BLOCKS = "";
-	public String MY_BLOCK_RECORDS = "";
 	
 	public Section_BLOCKS() {
 		section_name = "SECTION_BLOCKS.txt";

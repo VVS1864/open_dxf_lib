@@ -1,0 +1,12 @@
+ENDBLK
+  5
+%handle_endblock_dim%
+330
+%handle_block_records_dim%
+100
+AcDbEntity
+  8
+0
+100
+AcDbBlockEnd
+  0

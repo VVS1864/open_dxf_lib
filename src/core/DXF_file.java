@@ -28,14 +28,14 @@ public class DXF_file {
 	Section_BLOCKS SECTION_BLOCKS = new Section_BLOCKS();
 	Section_ENTITIES SECTION_ENTITIES = new Section_ENTITIES();
 	Section_OBJECTS SECTION_OBJECTS = new Section_OBJECTS();
-	
+		
 	public static HashMap<Integer, Color_rgb> dxf_rgb_color_map = new HashMap<>();
 	
 	public String file;
 	public Mode mode;
 	
 	public static String hex_handle = "BB";
-	public int int_handle = Integer.parseInt(hex_handle, 16);
+	public static int int_handle = Integer.parseInt(hex_handle, 16);
 
 	public DXF_file(Mode key, String file) {
 		load_dxf_colors();
@@ -99,7 +99,7 @@ public class DXF_file {
 		}
 	}
 	
-	void next_handle(){
+	public static void next_handle(){
 		int_handle += 1;
 		hex_handle = Integer.toHexString(int_handle).toUpperCase();		
 		if (hex_handle.equals("BD") || hex_handle.equals("105")){

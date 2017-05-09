@@ -3,7 +3,7 @@ package core;
 
 public class Section_OBJECTS extends Section {
 	
-	public String MY_LAST_HANDLE = "";
+	public String MY_LAST_HANDLE = ""; //???
 	
 	public Section_OBJECTS() {
 		section_name = "SECTION_OBJECTS.txt";

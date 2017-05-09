@@ -1,0 +1,19 @@
+BLOCK_RECORD
+  5
+%handle_block_record_dim_oblique%
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbBlockTableRecord
+  2
+_OBLIQUE
+340
+0
+102
+{BLKREFS
+%MY_BLKREFS%
+102
+}
+  0

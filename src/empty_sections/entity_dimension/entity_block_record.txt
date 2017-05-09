@@ -1,0 +1,14 @@
+BLOCK_RECORD
+  5
+%handle_block_records_dim%
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbBlockTableRecord
+  2
+*%dim_ind%
+340
+0
+  0
