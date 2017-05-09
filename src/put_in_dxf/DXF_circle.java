@@ -4,29 +4,24 @@ import core.Color_dxf;
 import core.Color_rgb;
 import core.DXF_Utils;
 import core.Section;
-import core.dash_type;
 import core.Width;
 
-public class DXF_line extends Section {
+public class DXF_circle extends Section {
 
 	/**
 	 * Multiple line string of line entity for add to SECTION_ENTITIES
 	 */
 	public String dxf_entity;
 
-	public DXF_line(double x1, double y1, double x2, double y2, dash_type dash, double factor, Color_rgb color_rgb,
-			int width) {
-		section_name = "entity_line.txt";
+	public DXF_circle(double x1, double y1, double R, Color_rgb color_rgb, int width) {
+		section_name = "entity_circle.txt";
 		body = super.init();
 		Color_dxf color_dxf = new Color_dxf(color_rgb);
 		Width width_dxf = new Width(width);
 		values.put("handle", core.DXF_file.hex_handle);
 		values.put("x1", Double.toString(x1));
 		values.put("y1", Double.toString(y1));
-		values.put("x2", Double.toString(x2));
-		values.put("y2", Double.toString(y2));
-		values.put("dash", dash.toString());
-		values.put("factor", Double.toString(factor));
+		values.put("R", Double.toString(R));
 		values.put("color", color_dxf.get_dxf_color_string());
 		values.put("width", width_dxf.get_dxf_with_string());
 		dxf_entity = DXF_Utils.replace_values(values, body);

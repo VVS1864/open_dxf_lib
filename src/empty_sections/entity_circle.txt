@@ -1,0 +1,24 @@
+CIRCLE
+5
+%handle%
+330
+1F
+100
+AcDbEntity
+  8
+0
+ 62
+  %color%
+370
+   %width%
+100
+AcDbCircle
+ 10
+%x1%
+ 20
+%y1%
+ 30
+0.0
+ 40
+%R%
+  0

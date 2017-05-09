@@ -6,7 +6,6 @@ public class Width {
 	public int DXF_width;
 	
 	public Width(int w){
-		System.out.println(w);
 		this.width = w;
 		switch(w){
 		case 1:
@@ -22,7 +21,6 @@ public class Width {
 			this.DXF_width = 158;
 			break;
 		}
-		System.out.println(DXF_width);
 	}
 	
 	public String get_dxf_with_string(){

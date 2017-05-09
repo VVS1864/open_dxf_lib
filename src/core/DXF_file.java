@@ -15,6 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import put_in_dxf.DXF_line;
+import put_in_dxf.DXF_circle;
 import core.dash_type;
 
 public class DXF_file {
@@ -51,8 +52,20 @@ public class DXF_file {
 			int width
 			){
 		next_handle();
-		String line = new DXF_line(x1, y1, x2, y2, dash, factor, color, width).dxf_line;
-		SECTION_ENTITIES.MY_ENTITIES += (line + "\n");
+		String entity = new DXF_line(x1, y1, x2, y2, dash, factor, color, width).dxf_entity;
+		SECTION_ENTITIES.MY_ENTITIES += (entity + "\n");
+	}
+	
+	public void put_circle(
+			double x1, 
+			double y1, 
+			double R, 
+			Color_rgb color,
+			int width
+			){
+		next_handle();
+		String entity = new DXF_circle(x1, y1, R, color, width).dxf_entity;
+		SECTION_ENTITIES.MY_ENTITIES += (entity + "\n");
 	}
 	
 	
@@ -84,8 +97,9 @@ public class DXF_file {
 	
 	void next_handle(){
 		int_handle += 1;
-		hex_handle = Integer.toHexString(int_handle).toUpperCase();
-		if (hex_handle == "BD" || hex_handle == "105"){
+		hex_handle = Integer.toHexString(int_handle).toUpperCase();		
+		if (hex_handle.equals("BD") || hex_handle.equals("105")){
+			System.out.println(hex_handle);
 			int_handle += 1;
 			hex_handle = Integer.toHexString(int_handle).toUpperCase();
 		}
@@ -129,7 +143,8 @@ public class DXF_file {
 		DXF_file f = new DXF_file(Mode.New_file, path);
 		Color_dxf c = new Color_dxf(76,0,0);
 		f.put_line(0, 300, 100, 50, core.dash_type.Continuous, 20, c, 1);
-		f.put_line(250, 300, 150, 50, core.dash_type.Continuous, 20, c, 4);
+		f.put_circle(250, 300, 50, c, 4);
+		f.put_line(0, 300, 100, 50, core.dash_type.Continuous, 20, c, 1);
 		//System.out.println(c.dxf_color + "  " + c.get_rgb_string());
 		f.save_file();
 	}

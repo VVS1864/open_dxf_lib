@@ -3,7 +3,7 @@ package core;
 
 public class Section_ENTITIES extends Section {
 	
-	public String MY_ENTITIES = "";
+	public String MY_ENTITIES = "\n";
 	
 	public Section_ENTITIES() {
 		section_name = "SECTION_ENTITIES.txt";
