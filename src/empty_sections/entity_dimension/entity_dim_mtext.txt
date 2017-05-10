@@ -20,7 +20,7 @@ AcDbMText
  40
 %dim_text_size%
  41
-0.0
+%dim_text_ss%
  71
      5
  72

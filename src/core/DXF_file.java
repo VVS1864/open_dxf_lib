@@ -18,16 +18,17 @@ import put_in_dxf.DXF_line;
 import put_in_dxf.DXF_arc;
 import put_in_dxf.DXF_circle;
 import put_in_dxf.DXF_text;
+import put_in_dxf.DXF_dimension.DXF_dimension;
 import core.dash_type;
 
 public class DXF_file {
 
-	Section_HEADER  SECTION_HEADER = new Section_HEADER();
-	Section_CLASSES  SECTION_CLASSES  = new Section_CLASSES();
-	Section_TABLES SECTION_TABLES = new Section_TABLES();
-	Section_BLOCKS SECTION_BLOCKS = new Section_BLOCKS();
-	Section_ENTITIES SECTION_ENTITIES = new Section_ENTITIES();
-	Section_OBJECTS SECTION_OBJECTS = new Section_OBJECTS();
+	public Section_HEADER  SECTION_HEADER = new Section_HEADER();
+	public Section_CLASSES  SECTION_CLASSES  = new Section_CLASSES();
+	public Section_TABLES SECTION_TABLES = new Section_TABLES();
+	public Section_BLOCKS SECTION_BLOCKS = new Section_BLOCKS();
+	public Section_ENTITIES SECTION_ENTITIES = new Section_ENTITIES();
+	public Section_OBJECTS SECTION_OBJECTS = new Section_OBJECTS();
 		
 	public static HashMap<Integer, Color_rgb> dxf_rgb_color_map = new HashMap<>();
 	
@@ -36,6 +37,7 @@ public class DXF_file {
 	
 	public static String hex_handle = "BB";
 	public static int int_handle = Integer.parseInt(hex_handle, 16);
+	public static int dimension_index = 0;
 
 	public DXF_file(Mode key, String file) {
 		load_dxf_colors();
@@ -71,6 +73,36 @@ public class DXF_file {
 
 		String entity = new DXF_text(x1, y1, text_size, angle, text_ss, color, text).dxf_entity;
 		put_base(entity);
+	}
+	
+	public void put_dimension(
+			double x1,
+			double y1, 
+			double x2,
+			double y2, 
+			double x3,
+			double y3, 
+			double ext_dim_lines,
+			double ext_ticks,
+			double dim_text_size,
+			double dim_text_ss, 
+			double s, 
+			int dim_text_change,
+			int text_x,
+			int text_y,
+			int angle, 
+			String arrow_type,
+			String text,
+			Color_rgb color_rgb){
+
+		DXF_dimension dim = new DXF_dimension(x1, y1, x2, y2, x3, y3, ext_dim_lines, ext_ticks, dim_text_size, dim_text_ss, s, dim_text_change, text_x, text_y, angle, arrow_type, text, color_rgb);
+				
+		//Write all dxf dimensions` parts to dxf sections
+		put_base(dim.dxf_entity);
+		SECTION_BLOCKS.MY_BLOCKS += (dim.dxf_blocks + "\n");
+		SECTION_TABLES.MY_ACAD_REACTORS += (dim.dxf_tables_ACAD_REACTORS + "\n");
+		SECTION_TABLES.MY_BLOCK_RECORDS += (dim.dxf_tables_BLOCK_RECORDS + "\n");
+		SECTION_TABLES.MY_BLKREFS += (dim.dxf_tables_BLKREFS + "\n");
 	}
 	
 	void save_file() {
