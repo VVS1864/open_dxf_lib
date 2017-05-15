@@ -1,6 +1,6 @@
 LINE
   5
-%handle_block_dim_line%
+%handle_block_dim_line_1%
 330
 %handle_block_records_dim%
 100
@@ -14,15 +14,15 @@ AcDbEntity
 100
 AcDbLine
  10
-%line_x1%
+%line1_x1%
  20
-%line_y1%
+%line1_y1%
  30
 0.0
  11
-%line_x2%
+%line1_x2%
  21
-%line_y2%
+%line1_y2%
  31
 0.0
   0

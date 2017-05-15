@@ -88,14 +88,15 @@ public class DXF_file {
 			double dim_text_ss, 
 			double s, 
 			int dim_text_change,
-			int text_x,
-			int text_y,
-			int angle, 
+			double text_x,
+			double text_y,
+			double arrow_size,
+			double angle, 
 			String arrow_type,
 			String text,
 			Color_rgb color_rgb){
 
-		DXF_dimension dim = new DXF_dimension(x1, y1, x2, y2, x3, y3, ext_dim_lines, ext_ticks, dim_text_size, dim_text_ss, s, dim_text_change, text_x, text_y, angle, arrow_type, text, color_rgb);
+		DXF_dimension dim = new DXF_dimension(x1, y1, x2, y2, x3, y3, ext_dim_lines, ext_ticks, dim_text_size, dim_text_ss, s, dim_text_change, text_x, text_y, arrow_size, angle, arrow_type, text, color_rgb);
 				
 		//Write all dxf dimensions` parts to dxf sections
 		put_base(dim.dxf_entity);
@@ -179,7 +180,7 @@ public class DXF_file {
 		Color_dxf c = new Color_dxf(76,0,0);
 		f.put_text(100, 50, 450, 0, 0.5, c, "Samocad - v0.0.9.0");
 		f.put_arc(250, 300, 50, 120, 360, c, 4);
-		//f.put_circle(250, 300, 50, c, 4);
+		f.put_circle(400, 300, 50, c, 4);
 		f.put_line(0, 320, 100, 50, core.dash_type.Continuous, 20, c, 1);
 		f.save_file();
 	}

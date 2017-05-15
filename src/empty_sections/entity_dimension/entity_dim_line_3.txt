@@ -1,0 +1,28 @@
+LINE
+  5
+%handle_block_dim_line_3%
+330
+%handle_block_records_dim%
+100
+AcDbEntity
+  8
+0
+ 62
+     0
+370
+    -2
+100
+AcDbLine
+ 10
+%line3_x1%
+ 20
+%line3_y1%
+ 30
+0.0
+ 11
+%line3_x2%
+ 21
+%line3_y2%
+ 31
+0.0
+  0

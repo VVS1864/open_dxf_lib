@@ -1,9 +1,10 @@
 package put_in_dxf.DXF_dimension;
 /**
  * Dimension text change (where is the text on dimension):
- * 1 - unchanged, auto
- * 2 - changed, place on dimension line out of dimension
- * 3 - changed, place on dimension line between lines
+ * 1 - text position unchanged, auto placing text;
+ * 2 - text position changed, text on dim line not on middle dim line3;
+ * 3 - text position changed, text is free;
+ * See figs/Dim text change.png
  */
 
 public class dim_change {
