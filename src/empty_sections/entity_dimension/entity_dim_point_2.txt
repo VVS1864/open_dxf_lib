@@ -1,6 +1,6 @@
 POINT
   5
-%handle_block_dim_point%
+%handle_block_dim_point_2%
 330
 %handle_block_records_dim%
 100
@@ -12,9 +12,9 @@ Defpoints
 100
 AcDbPoint
  10
-%point_x%
+%point_2_x%
  20
-%point_y%
+%point_2_y%
  30
 0.0
   0

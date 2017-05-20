@@ -1,6 +1,6 @@
 INSERT
   5
-%handle_block_dim_insert%
+%handle_block_dim_insert_1%
 330
 %handle_block_records_dim%
 100
@@ -16,9 +16,9 @@ AcDbBlockReference
   2
 _OBLIQUE
  10
-%arrow_x%
+%arrow_point_1_x%
  20
-%arrow_y%
+%arrow_point_1_y%
  30
 0.0
  41
@@ -28,5 +28,5 @@ _OBLIQUE
  43
 %arrow_s%
  50
-%angle_arrow%
+%angle_arrow_1%
   0

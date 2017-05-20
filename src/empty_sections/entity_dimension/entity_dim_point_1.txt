@@ -1,0 +1,20 @@
+POINT
+  5
+%handle_block_dim_point_1%
+330
+%handle_block_records_dim%
+100
+AcDbEntity
+  8
+Defpoints
+ 62
+     0
+100
+AcDbPoint
+ 10
+%point_1_x%
+ 20
+%point_2_y%
+ 30
+0.0
+  0

@@ -1,0 +1,38 @@
+SOLID
+  5
+%handle_block_dim_solid_1%
+330
+%handle_block_records_dim%
+100
+AcDbEntity
+  8
+0
+ 62
+     0
+100
+AcDbTrace
+ 10
+%arrow_1_x2%
+ 20
+%arrow_1_y2%
+ 30
+0.0
+ 11
+%arrow_2_x2%
+ 21
+%solid_2_y2%
+ 31
+0.0
+ 12
+%arrow_1_x1%
+ 22
+%arrow_1_y1%
+ 32
+0.0
+ 13
+%arrow_1_x1%
+ 23
+%arrow_1_y1%
+ 33
+0.0
+  0

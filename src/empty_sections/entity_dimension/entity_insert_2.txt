@@ -1,0 +1,32 @@
+INSERT
+  5
+%handle_block_dim_insert_2%
+330
+%handle_block_records_dim%
+100
+AcDbEntity
+  8
+0
+ 62
+     0
+370
+    -2
+100
+AcDbBlockReference
+  2
+_OBLIQUE
+ 10
+%arrow_point_2_x%
+ 20
+%arrow_point_2_y%
+ 30
+0.0
+ 41
+%arrow_s%
+ 42
+%arrow_s%
+ 43
+%arrow_s%
+ 50
+%angle_arrow_2%
+  0
