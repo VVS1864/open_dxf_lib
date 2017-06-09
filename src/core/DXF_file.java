@@ -1,6 +1,5 @@
 package core;
 
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
@@ -23,28 +22,31 @@ import core.dash_type;
 
 public class DXF_file {
 
-	public Section_HEADER  SECTION_HEADER = new Section_HEADER();
-	public Section_CLASSES  SECTION_CLASSES  = new Section_CLASSES();
+	public Section_HEADER SECTION_HEADER = new Section_HEADER();
+	public Section_CLASSES SECTION_CLASSES = new Section_CLASSES();
 	public Section_TABLES SECTION_TABLES = new Section_TABLES();
 	public Section_BLOCKS SECTION_BLOCKS = new Section_BLOCKS();
 	public Section_ENTITIES SECTION_ENTITIES = new Section_ENTITIES();
 	public Section_OBJECTS SECTION_OBJECTS = new Section_OBJECTS();
-		
+
 	public static HashMap<Integer, Color_rgb> dxf_rgb_color_map = new HashMap<>();
-	
+
 	public String file;
 	public Mode mode;
-	
+
 	public static String hex_handle = "BB";
 	public static int int_handle = Integer.parseInt(hex_handle, 16);
 	public static int dimension_index = 0;
+	// Key - True if block_oblique was created.
+	public static boolean key_oblique = false;
+	public static String handle_block_record_dim_oblique;
 
 	public DXF_file(Mode key, String file) {
 		load_dxf_colors();
 		this.file = file;
 		this.mode = key;
 	}
-	
+
 	public void put_base(String entity) {
 		next_handle();
 		SECTION_ENTITIES.MY_ENTITIES += (entity + "\n");
@@ -68,44 +70,33 @@ public class DXF_file {
 		String entity = new DXF_arc(x1, y1, R, start, extent, color, width).dxf_entity;
 		put_base(entity);
 	}
-	
-	public void put_text(double x1, double y1, double text_size, double angle, double text_ss, Color_rgb color, String text) {
+
+	public void put_text(double x1, double y1, double text_size, double angle, double text_ss, Color_rgb color,
+			String text) {
 
 		String entity = new DXF_text(x1, y1, text_size, angle, text_ss, color, text).dxf_entity;
 		put_base(entity);
 	}
-	
-	public void put_dimension(
-			double x1,
-			double y1, 
-			double x2,
-			double y2, 
-			double x3,
-			double y3, 
-			double ext_dim_lines,
-			double ext_ticks,
-			double dim_text_size,
-			double dim_text_ss, 
-			double s, 
-			int dim_text_change,
-			double text_x,
-			double text_y,
-			double arrow_size,
-			double angle, 
-			String arrow_type,
-			String text,
-			Color_rgb color_rgb){
 
-		DXF_dimension dim = new DXF_dimension(x1, y1, x2, y2, x3, y3, ext_dim_lines, ext_ticks, dim_text_size, dim_text_ss, s, dim_text_change, text_x, text_y, arrow_size, angle, arrow_type, text, color_rgb);
-				
-		//Write all dxf dimensions` parts to dxf sections
+	public void put_dimension(double x1, double y1, double x2, double y2, double x3, double y3, double ext_dim_lines,
+			double ext_ticks, double dim_text_size, double dim_text_width_factor, double s, int dim_text_change, double text_x,
+			double text_y, double arrow_size, double angle, String arrow_type, String text, Color_rgb color_rgb) {
+
+		DXF_dimension dim = new DXF_dimension(x1, y1, x2, y2, x3, y3, ext_dim_lines, ext_ticks, dim_text_size,
+				dim_text_width_factor, s, dim_text_change, text_x, text_y, arrow_size, angle, arrow_type, text, color_rgb,
+				key_oblique, handle_block_record_dim_oblique);
+
+		// Write all dxf dimensions` parts to dxf sections
 		put_base(dim.dxf_entity);
-		SECTION_BLOCKS.MY_BLOCKS += (dim.dxf_blocks + "\n");
-		SECTION_TABLES.MY_ACAD_REACTORS += (dim.dxf_tables_ACAD_REACTORS + "\n");
-		SECTION_TABLES.MY_BLOCK_RECORDS += (dim.dxf_tables_BLOCK_RECORDS + "\n");
-		SECTION_TABLES.MY_BLKREFS += (dim.dxf_tables_BLKREFS + "\n");
+		SECTION_BLOCKS.MY_BLOCKS += (dim.dxf_blocks);
+		SECTION_TABLES.MY_ACAD_REACTORS += (dim.dxf_tables_ACAD_REACTORS);
+		SECTION_TABLES.MY_BLOCK_RECORDS += (dim.dxf_tables_BLOCK_RECORDS);
+		SECTION_TABLES.MY_BLKREFS += (dim.dxf_tables_BLKREFS);
+		handle_block_record_dim_oblique = dim.handle_block_record_dim_oblique;
+		key_oblique = dim.key_oblique;
+		
 	}
-	
+
 	void save_file() {
 		String DXF = (SECTION_HEADER.to_string() + "\n");
 		DXF += (SECTION_CLASSES.to_string() + "\n");
@@ -122,8 +113,7 @@ public class DXF_file {
 			System.out.println("Error creating file");
 		}
 
-		try (BufferedWriter writer = Files.newBufferedWriter(
-				newFile, StandardCharsets.UTF_8)) {
+		try (BufferedWriter writer = Files.newBufferedWriter(newFile, StandardCharsets.UTF_8)) {
 			writer.append(DXF);
 			writer.flush();
 
@@ -131,27 +121,27 @@ public class DXF_file {
 			System.out.println("Error writing to file");
 		}
 	}
-	
-	public static void next_handle(){
+
+	public static void next_handle() {
 		int_handle += 1;
-		hex_handle = Integer.toHexString(int_handle).toUpperCase();		
-		if (hex_handle.equals("BD") || hex_handle.equals("105")){
+		hex_handle = Integer.toHexString(int_handle).toUpperCase();
+		if (hex_handle.equals("BD") || hex_handle.equals("105")) {
 			int_handle += 1;
 			hex_handle = Integer.toHexString(int_handle).toUpperCase();
 		}
 	}
-	
+
 	/**
 	 * Method for load data of colors dxf-rgb from file to HashMap
 	 */
-	void load_dxf_colors(){
+	void load_dxf_colors() {
 		String textLocation = "src/color_acad_rgb.txt";
-		//URL path = Object.class.getResource(textLocation);
-		//String path2 = path.getPath();
+		// URL path = Object.class.getResource(textLocation);
+		// String path2 = path.getPath();
 		File file = new File(textLocation);
 		String path2 = file.getAbsolutePath();
 		Path path3 = Paths.get(path2);
-		
+
 		List<String> stringList;
 		try {
 			stringList = Files.readAllLines(path3, StandardCharsets.UTF_8);
@@ -161,27 +151,53 @@ public class DXF_file {
 		}
 		String regex = "(\\d*):\\((\\d*),(\\d*),(\\d*)\\),";
 		Pattern pattern = Pattern.compile(regex);
-		for (String s: stringList){
+		for (String s : stringList) {
 			Matcher matcher = pattern.matcher(s);
-			if (matcher.matches()) {	
-				Color_rgb rgb = new Color_rgb(
-						Integer.parseInt(matcher.group(2)), 
-						Integer.parseInt(matcher.group(3)), 
-						Integer.parseInt(matcher.group(4))
-						);
+			if (matcher.matches()) {
+				Color_rgb rgb = new Color_rgb(Integer.parseInt(matcher.group(2)), Integer.parseInt(matcher.group(3)),
+						Integer.parseInt(matcher.group(4)));
 				dxf_rgb_color_map.put(Integer.parseInt(matcher.group(1)), rgb);
 			}
-		}	
+		}
 	}
-	
-	public static void main(String[] args){
+
+	public static void main(String[] args) {
 		String path = "/home/vlad/cad111.dxf";
 		DXF_file f = new DXF_file(Mode.New_file, path);
-		Color_dxf c = new Color_dxf(76,0,0);
+		Color_dxf c = new Color_dxf(255, 255, 255);
 		f.put_text(100, 50, 450, 0, 0.5, c, "Samocad - v0.0.9.0");
 		f.put_arc(250, 300, 50, 120, 360, c, 4);
 		f.put_circle(400, 300, 50, c, 4);
 		f.put_line(0, 320, 100, 50, core.dash_type.Continuous, 20, c, 1);
+		
+		f.put_dimension(300, 300, 1950, 300, 300, 800, 
+				200, //ext dim lines
+				100, //ext ticks
+				350, //text_size
+				0.67, //text width factor
+				50, //s
+				2, //text change
+				2633.140,  //text_x
+				1025, //text_y 
+				100, //arrow size
+				0, "Open 30", "", c);
+				
+		f.put_dimension(300, 300, 300, 1950, 1500, 300, 
+				200, //ext dim lines
+				100, //ext ticks
+				350, //text_size
+				0.67, //text width factor
+				50, //s
+				2, //text change
+				1600,  //text_x
+				2000, //text_y 
+				100, //arrow size
+				90, //angle
+				"Arch", //arrow type
+				"tret", //text
+				c //color
+				);
+				
 		f.save_file();
 	}
 }

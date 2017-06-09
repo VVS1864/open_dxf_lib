@@ -1,6 +1,6 @@
 SOLID
   5
-%handle_block_dim_solid_2%
+%handle_block_dim_insert_2%
 330
 %handle_block_records_dim%
 100

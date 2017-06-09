@@ -14,7 +14,7 @@ AcDbPoint
  10
 %point_1_x%
  20
-%point_2_y%
+%point_1_y%
  30
 0.0
   0

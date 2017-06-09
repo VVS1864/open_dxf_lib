@@ -29,11 +29,18 @@ public class DXF_Utils {
 	public static String replace_values(HashMap<String, String> values, String str){
 		String patternString = "%(" + StringUtils.join(values.keySet(), "|") + ")%";
 		Pattern pattern = Pattern.compile(patternString);
+		//try{
+		//Matcher matcher = pattern.matcher(str);
+		//}
+		//catch(NullPointerException e){
+		//	System.out.println(str);
+		//}
 		Matcher matcher = pattern.matcher(str);
 		StringBuffer sb = new StringBuffer();
 		while(matcher.find()) {
 		    matcher.appendReplacement(sb, values.get(matcher.group(1)));
 		}
+		
 		matcher.appendTail(sb);
 		
 		return sb.toString();

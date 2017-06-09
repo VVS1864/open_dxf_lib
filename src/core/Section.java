@@ -11,6 +11,11 @@ public abstract class Section {
 	public String body;
 	public HashMap<String, String> values = new HashMap<String, String>();
 	
+	/**
+	 * Method for read text of section in folder "src/empty_sections/"
+	 * @param text_section_name
+	 * @return text of section as String
+	 */
 	public String init(String text_section_name){
 		String textLocation = "src/empty_sections/"+text_section_name;
 		//URL path = Section.class.getResource(textLocation);

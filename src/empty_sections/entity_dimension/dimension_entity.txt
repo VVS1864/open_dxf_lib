@@ -14,15 +14,15 @@ AcDbDimension
   2
 *%dim_ind%
  10
-%arrow_point2_x%
+%arrow_point_2_x%
  20
-%arrow_point2_y%
+%arrow_point_2_y%
  30
 0.0
  11
-%text_xx%
+%text_x%
  21
-%text_yy%
+%text_y%
  31
 0.0
  70
@@ -32,7 +32,7 @@ AcDbDimension
  71
   5
  42
-%dim_distanse%
+%dim_measure%
   3
 ISO-25
 100
@@ -66,20 +66,19 @@ DSTYLE
 1070
    173
 1070
-     1
-%MY_ARROW_BLOCK_REF%
+     1%MY_ARROW_BLOCK_REF%
 1070
     44
 1040
-%ext_ticks%
+%ext_dim_lines%
 1070
     46
 1040
-%ext_dim_lines%
+%ext_ticks%
 1070
     41
 1040
-%arrow_s%
+%arrow_size%
 1070
     42
 1040

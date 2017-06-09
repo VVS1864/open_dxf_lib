@@ -8,6 +8,8 @@ public class calc{
 		double b = y - y0;
 		double x_new = a*cos + b*sin;
 		double y_new = -a*sin + b*cos;
+		x_new += x0;
+		y_new += y0;
 		double[] ret = {x_new, y_new};
 		return ret;
 	}
@@ -17,6 +19,8 @@ public class calc{
 		double b = y - y0;
 		double x_new = b*sin;
 		double y_new = -a*sin;
+		x_new += x0;
+		y_new += y0;
 		double[] ret = {x_new, y_new};
 		return ret;
 	}

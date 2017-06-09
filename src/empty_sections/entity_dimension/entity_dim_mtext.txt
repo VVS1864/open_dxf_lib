@@ -12,9 +12,9 @@ AcDbEntity
 100
 AcDbMText
  10
-%text_xx%
+%text_x%
  20
-%text_yy%
+%text_y%
  30
 0.0
  40
@@ -26,8 +26,7 @@ AcDbMText
  72
      1
   1
-%dim_distanse%
-%MY_TEXT_ROTATE%
+%mtext%%MY_TEXT_ROTATE%
  73
      1
  44

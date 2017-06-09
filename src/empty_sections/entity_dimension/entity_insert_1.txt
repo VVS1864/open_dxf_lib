@@ -22,11 +22,11 @@ _OBLIQUE
  30
 0.0
  41
-%arrow_s%
+%arrow_size%
  42
-%arrow_s%
+%arrow_size%
  43
-%arrow_s%
+%arrow_size%
  50
 %angle_arrow_1%
   0

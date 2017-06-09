@@ -1,6 +1,6 @@
 SOLID
   5
-%handle_block_dim_solid_1%
+%handle_block_dim_insert_1%
 330
 %handle_block_records_dim%
 100
@@ -20,7 +20,7 @@ AcDbTrace
  11
 %arrow_2_x2%
  21
-%solid_2_y2%
+%arrow_2_y2%
  31
 0.0
  12
