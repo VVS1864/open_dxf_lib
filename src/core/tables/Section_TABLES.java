@@ -1,11 +1,18 @@
-package core;
+package core.tables;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import core.DXF_Utils;
+import core.Section;
 
 public class Section_TABLES extends Section {
 	
 	public String MY_BLOCK_RECORDS = "";
 	public String MY_BLKREFS = "";
 	public String MY_ACAD_REACTORS = "";
+	
+	public HashMap<String, DXF_style> DXF_styles = new HashMap<>();
 	
 	public Section_TABLES() {
 		section_name = "SECTION_TABLES.txt";

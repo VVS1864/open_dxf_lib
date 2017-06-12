@@ -19,6 +19,7 @@ import put_in_dxf.DXF_circle;
 import put_in_dxf.DXF_text;
 import put_in_dxf.DXF_dimension.DXF_dimension;
 import core.dash_type;
+import core.tables.Section_TABLES;
 import open_file.parse_dxf;
 
 public class DXF_file {
@@ -130,8 +131,14 @@ public class DXF_file {
 	void read_file(String Abs_path) {
 		//read DXF file as very large string
 		dxf_large_string = DXF_Utils.readFile(Abs_path, StandardCharsets.UTF_8);
-		//open_file.parse_dxf(this);
-		parse_dxf tt = new parse_dxf(this);
+		
+		if (dxf_large_string != null) {
+			parse_dxf tt = new parse_dxf(this);
+		}
+		else{
+			System.out.println("Error reading file:");
+			System.out.println("file " + Abs_path + " is not exists");
+		}
 	}
 
 	public static void next_handle() {
