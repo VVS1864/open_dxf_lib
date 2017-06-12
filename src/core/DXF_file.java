@@ -19,9 +19,11 @@ import put_in_dxf.DXF_circle;
 import put_in_dxf.DXF_text;
 import put_in_dxf.DXF_dimension.DXF_dimension;
 import core.dash_type;
+import open_file.parse_dxf;
 
 public class DXF_file {
-
+	public String dxf_large_string = "";
+	
 	public Section_HEADER SECTION_HEADER = new Section_HEADER();
 	public Section_CLASSES SECTION_CLASSES = new Section_CLASSES();
 	public Section_TABLES SECTION_TABLES = new Section_TABLES();
@@ -45,6 +47,9 @@ public class DXF_file {
 		load_dxf_colors();
 		this.file = file;
 		this.mode = key;
+		if(mode == Mode.Open_file){
+			read_file(file);
+		}
 	}
 
 	public void put_base(String entity) {
@@ -121,6 +126,13 @@ public class DXF_file {
 			System.out.println("Error writing to file");
 		}
 	}
+	
+	void read_file(String Abs_path) {
+		//read DXF file as very large string
+		dxf_large_string = DXF_Utils.readFile(Abs_path, StandardCharsets.UTF_8);
+		//open_file.parse_dxf(this);
+		parse_dxf tt = new parse_dxf(this);
+	}
 
 	public static void next_handle() {
 		int_handle += 1;
@@ -163,6 +175,8 @@ public class DXF_file {
 
 	public static void main(String[] args) {
 		String path = "/home/vlad/cad111.dxf";
+		DXF_file f = new DXF_file(Mode.Open_file, path);
+		/*
 		DXF_file f = new DXF_file(Mode.New_file, path);
 		Color_dxf c = new Color_dxf(255, 255, 255);
 		f.put_text(100, 50, 450, 0, 0.5, c, "Samocad - v0.0.9.0");
@@ -199,5 +213,6 @@ public class DXF_file {
 				);
 				
 		f.save_file();
+		*/
 	}
 }
