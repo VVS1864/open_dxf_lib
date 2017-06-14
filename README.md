@@ -4,7 +4,7 @@ Open library for read and write .dxf files (autocad-compatible).
 It is fine and easy like this:
 
 
-<code>	
+```java
 	...
 	DXF_file f = new DXF_file(Mode.Open_file, "/home/mydxf.dxf); 
 	Color_dxf c = new Color_dxf(255, 255, 255);
@@ -29,4 +29,5 @@ It is fine and easy like this:
 				c //color
 				);
 	f.save_file();
-	...</code>
+	...
+```
