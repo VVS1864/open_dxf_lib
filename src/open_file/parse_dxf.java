@@ -20,9 +20,8 @@ public class parse_dxf {
 
 	public parse_dxf(DXF_file f) {
 		this.f = f;
-		//boolean break_err = false;
+		
 		//Break if there is error in DXF
-		 
 		while (true) {
 			// HEADER
 			f.SECTION_HEADER.body = parse_section("HEADER");
@@ -31,7 +30,7 @@ public class parse_dxf {
 			//TABLES
 			f.SECTION_TABLES.body = parse_section("TABLES");
 			if (f.SECTION_TABLES.body == null){
-				print_err("Section TABLES not found");
+				print_err("Section TABLES is not found");
 				break;
 			}
 			else{
@@ -40,7 +39,7 @@ public class parse_dxf {
 			//BLOCKS
 			f.SECTION_BLOCKS.body = parse_section("BLOCKS");
 			if (f.SECTION_BLOCKS.body == null){
-				print_err("Section BLOCKS not found");
+				print_err("Section BLOCKS is not found");
 				break;
 			}
 			else{
@@ -49,7 +48,7 @@ public class parse_dxf {
 			//ENTITIES
 			f.SECTION_ENTITIES.body = parse_section("ENTITIES");
 			if (f.SECTION_ENTITIES.body == null){
-				print_err("Section ENTITIES not found");
+				print_err("Section ENTITIES is not found");
 				break;
 			}
 			else{
@@ -65,7 +64,7 @@ public class parse_dxf {
 
 	public void DXF_styles(){
 		String DXF_TABLE_styles = find_in_text(f.SECTION_TABLES.body, 
-				"0%br%TABLE%br%2%br%STYLE([\\w\\W]*?%br%ENDTAB)", "table styles not found");
+				"0%br%TABLE%br%2%br%STYLE([\\w\\W]*?%br%ENDTAB)", "table styles is not found");
 		Matcher m = parse_text(DXF_TABLE_styles,
 				"(?<=0\r?\n[ ]?)STYLE%br%([\\w\\W]*?)%br%0%br%(?=STYLE|ENDTAB)");
 		while (m.find() == true) {
