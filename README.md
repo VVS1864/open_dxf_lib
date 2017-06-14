@@ -6,7 +6,7 @@ It is fine and easy like this:
 
 ```java
 	...
-	DXF_file f = new DXF_file(Mode.Open_file, "/home/mydxf.dxf); 
+	DXF_file f = new DXF_file(Mode.Open_file, "/home/mydxf.dxf"); 
 	Color_dxf c = new Color_dxf(255, 255, 255);
 	f.put_text(100, 50, 450, 0, 0.5, c, "text in dxf file");
 	f.put_arc(250, 300, 50, 120, 360, c, 4);
