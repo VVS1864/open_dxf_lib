@@ -68,20 +68,23 @@ public class parse_dxf {
 				"0%br%TABLE%br%2%br%STYLE([\\w\\W]*?%br%ENDTAB)", "table styles not found");
 		Matcher m = parse_text(DXF_TABLE_styles,
 				"(?<=0\r?\n[ ]?)STYLE%br%([\\w\\W]*?)%br%0%br%(?=STYLE|ENDTAB)");
-		//ArrayList<String> styles = new ArrayList<String>();
-		int i = 0;
 		while (m.find() == true) {
-			i++;
 			String s = m.group(1);
-			
 			String[] parts = s.split(br);
 			String name = property_finder(parts, "2");
 			String handle = property_finder(parts, "5");
 			String text_size = property_finder(parts, "42");
 			String width_factor = property_finder(parts, "41");
-			f.SECTION_TABLES.DXF_styles.put(name,
-					new DXF_style(name, handle, Double.parseDouble(text_size), Double.parseDouble(width_factor)));
 
+			if (name != null && handle != null && text_size != null && width_factor != null) {
+				try {
+					f.SECTION_TABLES.DXF_styles.put(name, new DXF_style(name, handle, Double.parseDouble(text_size),
+							Double.parseDouble(width_factor)));
+				} catch (NumberFormatException e) {
+					System.out.println("Read error in DXF_styles, bad value for parseDouble: 'text_size' = " + text_size
+							+ ", 'width_factor' = " + width_factor);
+				}
+			}
 		}
 		System.out.println("Read " + f.SECTION_TABLES.DXF_styles.size() + " Styles");
 	}
@@ -106,7 +109,7 @@ public class parse_dxf {
 	}
 	
 	/**
-	 * General method for find values it any text with regular exp.
+	 * General method for find values it any multi line text with regular exp.
 	 * @param text
 	 * @param regex
 	 * @return matcher 
@@ -117,6 +120,12 @@ public class parse_dxf {
 		regex = DXF_Utils.replace_values(values, regex);
 		return parse_string(text, regex);
 	}
+	/**
+	 * For one-line text
+	 * @param text
+	 * @param regex
+	 * @return
+	 */
 	public Matcher parse_string(String text, String regex){
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(text);
@@ -138,7 +147,12 @@ public class parse_dxf {
 		
 		return section_body;
 	}
-	//Method for find property in split strings
+	/**
+	 * Method for find property in split strings
+	 * @param strings
+	 * @param property_regex
+	 * @return
+	 */
 	public String property_finder(String[] strings, String property_regex){
 		String value = null;
 		property_regex = "\\b" + property_regex + "\\b";
