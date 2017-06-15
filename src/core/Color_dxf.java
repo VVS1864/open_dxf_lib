@@ -6,22 +6,29 @@ import java.util.Map;
 
 public class Color_dxf extends Color_rgb{
 	
-	public int dxf_color;
+	private int dxf_color;
 	public final HashMap<Integer, Color_rgb> dxf_rgb_color_map = new HashMap<>();
 	
 	public Color_dxf(int r, int g, int b) {
-		super(r, g, b);
-		this.dxf_color = get_dxf_color(r, g, b);
-		Color_rgb normal_color = DXF_file.dxf_rgb_color_map.get(dxf_color);
-		this.r = normal_color.r;
-		this.g = normal_color.g;
-		this.b = normal_color.b;
+		this(get_dxf_color(r, g, b));
 	}
 	
 	public Color_dxf(Color_rgb c) {
-		this(c.r, c.g, c.b);
+		this(c.get_r(), c.get_g(), c.get_b());
 	}
 	
+	public Color_dxf(int dxf_color) {
+		super(0, 0, 0);
+		if(DXF_file.dxf_rgb_color_map.containsKey(dxf_color)){
+			Color_rgb normal_color = DXF_file.dxf_rgb_color_map.get(dxf_color);
+			set_r(normal_color.get_r());
+			set_g(normal_color.get_g());
+			set_b(normal_color.get_b());
+		}
+		else{
+			System.out.println("DXF color value error: color '" + dxf_color + "' is not found");
+		}
+	}
 	/**
 	 * This method for find nearest dxf color (int value) in dxf-rgb table for any rgb color (0-255, 0-255, 0-255)
 	 * @param r
@@ -33,9 +40,9 @@ public class Color_dxf extends Color_rgb{
 		double min_dist = 2500;
 		int dxf_color = 7;
 		for (Map.Entry<Integer, Color_rgb> entry: DXF_file.dxf_rgb_color_map.entrySet()){
-			int r2 = entry.getValue().r;
-			int g2 = entry.getValue().g;
-			int b2 = entry.getValue().b;
+			int r2 = entry.getValue().get_r();
+			int g2 = entry.getValue().get_g();
+			int b2 = entry.getValue().get_b();
 			double color_dist = Math.sqrt(Math.pow((r-r2), 2) + Math.pow((g-g2), 2) + Math.pow((b-b2), 2));
 			
 			if (color_dist < min_dist){
@@ -44,6 +51,9 @@ public class Color_dxf extends Color_rgb{
 			}
 		}
 		
+		return dxf_color;
+	}
+	public int get_dxf_color(){
 		return dxf_color;
 	}
 	

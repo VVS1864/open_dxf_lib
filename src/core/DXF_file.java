@@ -183,6 +183,7 @@ public class DXF_file {
 	public static void main(String[] args) {
 		String path = "/home/vlad/cad111.dxf";
 		DXF_file f = new DXF_file(Mode.Open_file, path);
+		//f.SECTION_TABLES.print_styles();
 		/*
 		DXF_file f = new DXF_file(Mode.New_file, path);
 		Color_dxf c = new Color_dxf(255, 255, 255);

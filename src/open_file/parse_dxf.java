@@ -58,6 +58,8 @@ public class parse_dxf {
 			f.SECTION_OBJECTS.body = parse_section("OBJECTS");
 			//styles
 			DXF_styles();
+			//layers
+			DXF_layers();
 			break;
 		}
 	}
@@ -88,6 +90,11 @@ public class parse_dxf {
 		System.out.println("Read " + f.SECTION_TABLES.DXF_styles.size() + " Styles");
 	}
 
+	public void DXF_layers(){
+		String DXF_TABLE_layers = find_in_text(f.SECTION_TABLES.body, 
+				"0%br%TABLE%br%[ ]*2%br%LAYER([\\w\\W]*?%br%ENDTAB)", "table layers is not found");
+		
+	}
 	public void print_err(String comment){
 		System.out.println("DXF fatal error:");
 		System.out.println(comment);

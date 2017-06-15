@@ -1,6 +1,6 @@
 package core.tables;
 
-/*
+/**
  * text style, include handle, text size and text width factor
  */
 public class DXF_style {
