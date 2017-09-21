@@ -2,7 +2,8 @@ package put_in_dxf.DXF_dimension;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import core.calc;
+
+import open_dxf_lib.calc;
 
 /**
  * Parameterized dim --> dim with HashMaps of lines, arrows and text coords for

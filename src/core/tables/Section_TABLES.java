@@ -3,8 +3,8 @@ package core.tables;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import core.DXF_Utils;
-import core.Section;
+import open_dxf_lib.DXF_Utils;
+import open_dxf_lib.Section;
 
 public class Section_TABLES extends Section {
 	

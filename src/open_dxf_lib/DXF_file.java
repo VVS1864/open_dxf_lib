@@ -1,4 +1,4 @@
-package core;
+package open_dxf_lib;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -18,8 +18,8 @@ import put_in_dxf.DXF_arc;
 import put_in_dxf.DXF_circle;
 import put_in_dxf.DXF_text;
 import put_in_dxf.DXF_dimension.DXF_dimension;
-import core.dash_type;
 import core.tables.Section_TABLES;
+import open_dxf_lib.dash_type;
 import open_file.parse_dxf;
 
 public class DXF_file {

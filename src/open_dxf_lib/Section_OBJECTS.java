@@ -1,4 +1,4 @@
-package core;
+package open_dxf_lib;
 
 
 public class Section_OBJECTS extends Section {

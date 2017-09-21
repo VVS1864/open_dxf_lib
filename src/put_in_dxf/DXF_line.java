@@ -1,11 +1,11 @@
 package put_in_dxf;
 
-import core.Color_dxf;
-import core.Color_rgb;
-import core.DXF_Utils;
-import core.Section;
-import core.dash_type;
-import core.Width;
+import open_dxf_lib.Color_dxf;
+import open_dxf_lib.Color_rgb;
+import open_dxf_lib.DXF_Utils;
+import open_dxf_lib.Section;
+import open_dxf_lib.Width;
+import open_dxf_lib.dash_type;
 
 public class DXF_line extends Section {
 
@@ -20,7 +20,7 @@ public class DXF_line extends Section {
 		body = super.init();
 		Color_dxf color_dxf = new Color_dxf(color_rgb);
 		Width width_dxf = new Width(width);
-		values.put("handle", core.DXF_file.hex_handle);
+		values.put("handle", open_dxf_lib.DXF_file.hex_handle);
 		values.put("color", color_dxf.get_dxf_color_string());
 		values.put("width", width_dxf.get_dxf_with_string());
 		values.put("x1", Double.toString(x1));

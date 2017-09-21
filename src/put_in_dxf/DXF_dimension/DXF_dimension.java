@@ -2,12 +2,12 @@ package put_in_dxf.DXF_dimension;
 
 import java.util.HashMap;
 
-import core.Color_dxf;
-import core.Color_rgb;
-import core.DXF_Utils;
-import core.DXF_file;
-import core.Section;
-import core.Width;
+import open_dxf_lib.Color_dxf;
+import open_dxf_lib.Color_rgb;
+import open_dxf_lib.DXF_Utils;
+import open_dxf_lib.DXF_file;
+import open_dxf_lib.Section;
+import open_dxf_lib.Width;
 import put_in_dxf.DXF_dimension.Dim_parts;
 
 public class DXF_dimension extends Section {
@@ -144,40 +144,40 @@ public class DXF_dimension extends Section {
 		System.out.println(values.size());
 		
 		//dimension_index
-		core.DXF_file.dimension_index += 1;
+		open_dxf_lib.DXF_file.dimension_index += 1;
 		
-		String dim_handle = core.DXF_file.hex_handle; //???String
+		String dim_handle = open_dxf_lib.DXF_file.hex_handle; //???String
 		//Handles:
 		values.put("handle", dim_handle);
-		core.DXF_file.next_handle();
-		values.put("handle_block_records_dim", core.DXF_file.hex_handle);
-		core.DXF_file.next_handle();
-		values.put("handle_block_dim", core.DXF_file.hex_handle);
-		core.DXF_file.next_handle();
-		values.put("handle_endblock_dim", core.DXF_file.hex_handle);
-		core.DXF_file.next_handle();
-		values.put("handle_block_dim_line_1", core.DXF_file.hex_handle);
-		core.DXF_file.next_handle();
-		values.put("handle_block_dim_line_2", core.DXF_file.hex_handle);
-		core.DXF_file.next_handle();
-		values.put("handle_block_dim_line_3", core.DXF_file.hex_handle);
-		core.DXF_file.next_handle();
-		values.put("handle_block_dim_insert_1", core.DXF_file.hex_handle);
-		core.DXF_file.next_handle();
-		values.put("handle_block_dim_blkrefs_insert_1", core.DXF_file.hex_handle);
-		core.DXF_file.next_handle();
-		values.put("handle_block_dim_insert_2", core.DXF_file.hex_handle);
-		core.DXF_file.next_handle();
-		values.put("handle_block_dim_blkrefs_insert_2", core.DXF_file.hex_handle);
-		core.DXF_file.next_handle();
-		values.put("handle_block_dim_mtext", core.DXF_file.hex_handle);
-		core.DXF_file.next_handle();
-		values.put("handle_block_dim_point_1", core.DXF_file.hex_handle);
-		core.DXF_file.next_handle();
-		values.put("handle_block_dim_point_2", core.DXF_file.hex_handle);
-		core.DXF_file.next_handle();
-		values.put("handle_block_dim_point_3", core.DXF_file.hex_handle);
-		core.DXF_file.next_handle();
+		open_dxf_lib.DXF_file.next_handle();
+		values.put("handle_block_records_dim", open_dxf_lib.DXF_file.hex_handle);
+		open_dxf_lib.DXF_file.next_handle();
+		values.put("handle_block_dim", open_dxf_lib.DXF_file.hex_handle);
+		open_dxf_lib.DXF_file.next_handle();
+		values.put("handle_endblock_dim", open_dxf_lib.DXF_file.hex_handle);
+		open_dxf_lib.DXF_file.next_handle();
+		values.put("handle_block_dim_line_1", open_dxf_lib.DXF_file.hex_handle);
+		open_dxf_lib.DXF_file.next_handle();
+		values.put("handle_block_dim_line_2", open_dxf_lib.DXF_file.hex_handle);
+		open_dxf_lib.DXF_file.next_handle();
+		values.put("handle_block_dim_line_3", open_dxf_lib.DXF_file.hex_handle);
+		open_dxf_lib.DXF_file.next_handle();
+		values.put("handle_block_dim_insert_1", open_dxf_lib.DXF_file.hex_handle);
+		open_dxf_lib.DXF_file.next_handle();
+		values.put("handle_block_dim_blkrefs_insert_1", open_dxf_lib.DXF_file.hex_handle);
+		open_dxf_lib.DXF_file.next_handle();
+		values.put("handle_block_dim_insert_2", open_dxf_lib.DXF_file.hex_handle);
+		open_dxf_lib.DXF_file.next_handle();
+		values.put("handle_block_dim_blkrefs_insert_2", open_dxf_lib.DXF_file.hex_handle);
+		open_dxf_lib.DXF_file.next_handle();
+		values.put("handle_block_dim_mtext", open_dxf_lib.DXF_file.hex_handle);
+		open_dxf_lib.DXF_file.next_handle();
+		values.put("handle_block_dim_point_1", open_dxf_lib.DXF_file.hex_handle);
+		open_dxf_lib.DXF_file.next_handle();
+		values.put("handle_block_dim_point_2", open_dxf_lib.DXF_file.hex_handle);
+		open_dxf_lib.DXF_file.next_handle();
+		values.put("handle_block_dim_point_3", open_dxf_lib.DXF_file.hex_handle);
+		open_dxf_lib.DXF_file.next_handle();
 		
 		values.put("color", color_dxf.get_dxf_color_string());
 		values.put("x1", Double.toString(x1));
@@ -198,7 +198,7 @@ public class DXF_dimension extends Section {
 		values.put("angle", Double.toString(angle));
 		values.put("DXF_dim_text_change", Integer.toString(DXF_dim_text_change.DXF_dim_text_change));
 		values.put("DXF_dim_text_change_2", Integer.toString(DXF_dim_text_change.DXF_dim_text_change2));
-		values.put("dim_ind", "D"+Integer.toString(core.DXF_file.dimension_index));
+		values.put("dim_ind", "D"+Integer.toString(open_dxf_lib.DXF_file.dimension_index));
 		
 		//Add dimension handle to ACAD_REACTORS in SECTION_TABLES
 		dxf_tables_ACAD_REACTORS += ("330\n" + dim_handle + "\n");
@@ -230,15 +230,15 @@ public class DXF_dimension extends Section {
 			//if block oblique not exist - create it
 			if(key_oblique == false){
 				//Handles
-				core.DXF_file.next_handle();
-				handle_block_record_dim_oblique = core.DXF_file.hex_handle;
-				values.put("handle_block_record_dim_oblique", core.DXF_file.hex_handle);
-				core.DXF_file.next_handle();
-				values.put("handle_block_dim_oblique", core.DXF_file.hex_handle);
-				core.DXF_file.next_handle();
-				values.put("handle_endblock_dim_oblique", core.DXF_file.hex_handle);
-				core.DXF_file.next_handle();
-				values.put("handle_oblique_line", core.DXF_file.hex_handle);
+				open_dxf_lib.DXF_file.next_handle();
+				handle_block_record_dim_oblique = open_dxf_lib.DXF_file.hex_handle;
+				values.put("handle_block_record_dim_oblique", open_dxf_lib.DXF_file.hex_handle);
+				open_dxf_lib.DXF_file.next_handle();
+				values.put("handle_block_dim_oblique", open_dxf_lib.DXF_file.hex_handle);
+				open_dxf_lib.DXF_file.next_handle();
+				values.put("handle_endblock_dim_oblique", open_dxf_lib.DXF_file.hex_handle);
+				open_dxf_lib.DXF_file.next_handle();
+				values.put("handle_oblique_line", open_dxf_lib.DXF_file.hex_handle);
 				
 				dxf_tables_BLOCK_RECORDS = put_to_section("entity_dimension/block_oblique/block_record.txt", dxf_tables_BLOCK_RECORDS);
 				System.out.println("eee" + dxf_tables_BLOCK_RECORDS + "2222222");

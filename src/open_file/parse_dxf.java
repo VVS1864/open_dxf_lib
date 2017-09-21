@@ -1,16 +1,15 @@
 package open_file;
 
-import core.DXF_file;
-import core.Mode;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import core.DXF_Utils;
-import core.Section;
 import core.tables.DXF_style;
+import open_dxf_lib.DXF_Utils;
+import open_dxf_lib.DXF_file;
+import open_dxf_lib.Mode;
+import open_dxf_lib.Section;
 
 public class parse_dxf {
 	DXF_file f;

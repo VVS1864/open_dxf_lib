@@ -1,6 +1,6 @@
 package core.tables;
 
-import core.Color_dxf;
+import open_dxf_lib.Color_dxf;
 
 /**
  * dxf layer, include color, linetype, linewidth.
