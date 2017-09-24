@@ -135,13 +135,13 @@ public class DXF_dimension extends Section {
 		
 		//Get coords of dim parts (lines, arrows, text...)
 		//HashMap<String, Integer> dim_parts_coords = new HashMap<String, Integer>();
-		System.out.println(dim_text_change);
+		
 		Dim_parts maked_dim = new Dim_parts(this);
 		dim_text_change = maked_dim.dim_text_change;
 		dim_change DXF_dim_text_change = new dim_change(dim_text_change);
-		System.out.println(dim_text_change);
+		
 		values.putAll(maked_dim.lines);
-		System.out.println(values.size());
+		
 		
 		//dimension_index
 		open_dxf_lib.DXF_file.dimension_index += 1;
@@ -205,7 +205,7 @@ public class DXF_dimension extends Section {
 		
 		//Add block_records_handle and dim index to BLOCK_RECORDS in SECTION_TABLES
 		dxf_tables_BLOCK_RECORDS = put_to_section("entity_dimension/entity_block_record.txt", dxf_tables_BLOCK_RECORDS);
-		System.out.println("eee" + dxf_tables_BLOCK_RECORDS + "1111111");
+		
 		
 		//Add  handle of block, block_records and dim index to BLOCKS in SECTION_BLOCKS
 		dxf_blocks = put_to_section("entity_dimension/entity_block.txt", dxf_blocks);
@@ -241,7 +241,7 @@ public class DXF_dimension extends Section {
 				values.put("handle_oblique_line", open_dxf_lib.DXF_file.hex_handle);
 				
 				dxf_tables_BLOCK_RECORDS = put_to_section("entity_dimension/block_oblique/block_record.txt", dxf_tables_BLOCK_RECORDS);
-				System.out.println("eee" + dxf_tables_BLOCK_RECORDS + "2222222");
+				
 				key_oblique = true;
 				new_oblique = true;
 			}

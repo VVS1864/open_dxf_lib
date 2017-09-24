@@ -1,7 +1,8 @@
 package open_dxf_lib;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
+
 import java.io.IOException;
 
 import java.nio.charset.StandardCharsets;
@@ -103,7 +104,7 @@ public class DXF_file {
 		
 	}
 
-	void save_file() {
+	public void save_file() {
 		String DXF = (SECTION_HEADER.to_string() + "\n");
 		DXF += (SECTION_CLASSES.to_string() + "\n");
 		DXF += (SECTION_TABLES.to_string() + "\n");
@@ -128,7 +129,7 @@ public class DXF_file {
 		}
 	}
 	
-	void read_file(String Abs_path) {
+	public void read_file(String Abs_path) {
 		//read DXF file as very large string
 		dxf_large_string = DXF_Utils.readFile(Abs_path, StandardCharsets.UTF_8);
 		
@@ -153,17 +154,39 @@ public class DXF_file {
 	/**
 	 * Method for load data of colors dxf-rgb from file to HashMap
 	 */
-	void load_dxf_colors() {
-		String textLocation = "src/color_acad_rgb.txt";
-		// URL path = Object.class.getResource(textLocation);
-		// String path2 = path.getPath();
-		File file = new File(textLocation);
-		String path2 = file.getAbsolutePath();
-		Path path3 = Paths.get(path2);
-
+	private void load_dxf_colors() {
+		String textLocation = "/color_acad_rgb.txt";
+		//Path path = DXF_Utils.get_absolute_path(textLocation);
+		BufferedReader br = DXF_Utils.read_section(textLocation);
+		String regex = "(\\d*):\\((\\d*),(\\d*),(\\d*)\\),";
+		Pattern pattern = Pattern.compile(regex);
+		String s = "";
+		
+		try {
+			while ((s = br.readLine()) != null) {
+				Matcher matcher = pattern.matcher(s);
+				if (matcher.matches()) {
+					Color_rgb rgb = new Color_rgb(Integer.parseInt(matcher.group(2)), Integer.parseInt(matcher.group(3)),
+							Integer.parseInt(matcher.group(4)));
+					dxf_rgb_color_map.put(Integer.parseInt(matcher.group(1)), rgb);
+					
+				}
+			
+			}
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		/*
 		List<String> stringList;
 		try {
-			stringList = Files.readAllLines(path3, StandardCharsets.UTF_8);
+			stringList = Files.readAllLines(path, StandardCharsets.UTF_8);
 		} catch (IOException e) {
 			e.printStackTrace();
 			return;
@@ -176,21 +199,21 @@ public class DXF_file {
 				Color_rgb rgb = new Color_rgb(Integer.parseInt(matcher.group(2)), Integer.parseInt(matcher.group(3)),
 						Integer.parseInt(matcher.group(4)));
 				dxf_rgb_color_map.put(Integer.parseInt(matcher.group(1)), rgb);
-			}
-		}
+			}*/
+		
 	}
 
 	public static void main(String[] args) {
 		String path = "/home/vlad/cad111.dxf";
-		DXF_file f = new DXF_file(Mode.Open_file, path);
+		//DXF_file f = new DXF_file(Mode.Open_file, path);
 		//f.SECTION_TABLES.print_styles();
-		/*
+		
 		DXF_file f = new DXF_file(Mode.New_file, path);
-		Color_dxf c = new Color_dxf(255, 255, 255);
+		Color_dxf c = new Color_dxf(255, 0, 0);
 		f.put_text(100, 50, 450, 0, 0.5, c, "Samocad - v0.0.9.0");
 		f.put_arc(250, 300, 50, 120, 360, c, 4);
 		f.put_circle(400, 300, 50, c, 4);
-		f.put_line(0, 320, 100, 50, core.dash_type.Continuous, 20, c, 1);
+		f.put_line(0, 320, 100, 50, dash_type.Continuous, 20, c, 1);
 		
 		f.put_dimension(300, 300, 1950, 300, 300, 800, 
 				200, //ext dim lines
@@ -221,6 +244,6 @@ public class DXF_file {
 				);
 				
 		f.save_file();
-		*/
+		
 	}
 }

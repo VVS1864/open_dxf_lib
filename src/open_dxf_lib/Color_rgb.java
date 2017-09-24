@@ -6,10 +6,15 @@ public class Color_rgb {
 	private int g;
 	private int b;
 	private String err_str = "rgb color value error, ";
-	Color_rgb(int r, int g, int b) {
+	public Color_rgb(int r, int g, int b) {
 		set_r(r);
 		set_g(g);
 		set_b(b);
+	}
+	
+	public Color_rgb(int[] rgb) {
+		this(rgb[0], rgb[1], rgb[2]);
+		
 	}
 	
 	public void set_r(int r){
@@ -29,6 +34,8 @@ public class Color_rgb {
 	public int get_r(){return r;}
 	public int get_g(){return g;}
 	public int get_b(){return b;}
+	
+	public int[] get_rgb(){return new int[]{r,g,b};};
 	
 	public String get_rgb_string(){
 		String rgb = Integer.toString(r) + ", " + Integer.toString(g) + ", " + Integer.toString(b);

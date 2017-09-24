@@ -20,6 +20,7 @@ public class Color_dxf extends Color_rgb{
 	public Color_dxf(int dxf_color) {
 		super(0, 0, 0);
 		if(DXF_file.dxf_rgb_color_map.containsKey(dxf_color)){
+			this.dxf_color = dxf_color;
 			Color_rgb normal_color = DXF_file.dxf_rgb_color_map.get(dxf_color);
 			set_r(normal_color.get_r());
 			set_g(normal_color.get_g());

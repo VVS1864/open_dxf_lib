@@ -79,7 +79,6 @@ public class Dim_parts {
 		//String text;
 		if (dim.text.equals("")) {
 			mtext = String.format("%.0f", dim_measure);
-			System.out.println(mtext);
 		} else {
 			mtext = dim.text;
 		}
@@ -131,7 +130,7 @@ public class Dim_parts {
 				text_x = dim.text_x;
 				text_y = dim.text_y;
 			}
-			System.out.println("3text change "+dim_text_change);
+			//System.out.println("3text change "+dim_text_change);
 		}
 		if (dim_text_change == 2) {
 			if (dim.text_x == (x_max + x_min) / 2.0) {
@@ -148,7 +147,7 @@ public class Dim_parts {
 				text_x = dim.text_x;
 				
 			}
-			System.out.println("2text change "+dim_text_change);
+			//System.out.println("2text change "+dim_text_change);
 		}
 		if (dim_text_change == 1) {
 			// if text not fit between dim lines - move it outside dim lines
@@ -159,7 +158,7 @@ public class Dim_parts {
 
 				text_x = x_max + dim.arrow_size * 3 + text_length / 2.0;
 			}
-			System.out.println("1text change "+dim_text_change);
+			//System.out.println("1text change "+dim_text_change);
 		}
 		//Text coords
 		put_point("text", text_x, text_y);

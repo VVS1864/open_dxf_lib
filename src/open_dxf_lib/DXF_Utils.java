@@ -1,9 +1,14 @@
 package open_dxf_lib;
 
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -45,7 +50,31 @@ public class DXF_Utils {
 		
 		return sb.toString();
 	}
-	
+	/**
+	 * For reade any text-data in .jar as large string
+	 * @param source_name
+	 * @return
+	 */
+	public static BufferedReader read_section(String source_name){
+		InputStreamReader sr = new InputStreamReader(Object.class.getClass().getResourceAsStream(source_name));
+		BufferedReader br = new BufferedReader(sr);
+		return br;
+	}
+	/*
+	public static Path get_absolute_path(String source_name){
+		URL textURL = Object.class.getResource(source_name);
+		System.out.println(textURL);
+		Path path = null;
+		try {
+			path = Paths.get(textURL.toURI());
+			
+		} catch (URISyntaxException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return path;
+	}
+	*/
 	public static void main(String[] args){
 		HashMap<String, String> values = new HashMap<String, String>();
 		values.put("x1", "560.00");

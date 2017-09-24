@@ -1,10 +1,12 @@
 package open_dxf_lib;
 
 
-import java.io.File;
-import java.net.URL;
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+
+import open_dxf_lib.DXF_Utils;
 
 public abstract class Section {
 	public String section_name;
@@ -16,16 +18,34 @@ public abstract class Section {
 	 * @param text_section_name
 	 * @return text of section as String
 	 */
-	public String init(String text_section_name){
-		String textLocation = "src/empty_sections/"+text_section_name;
-		//URL path = Section.class.getResource(textLocation);
-		//URL path = this.getClass().getClassLoader().getResource(textLocation);
-		File file = new File(textLocation);
-		String path2 = file.getAbsolutePath();
-		//String path2 = path.getPath();
-		String section_text = DXF_Utils.readFile(path2, StandardCharsets.UTF_8);
+	public String init(String text_section_name) {
+		String textLocation = "/empty_sections/" + text_section_name;
+		BufferedReader br = DXF_Utils.read_section(textLocation);
+		StringBuilder builder = new StringBuilder();
+		try {
+			String s = br.readLine();
+			while(true){
+				builder.append(s);
+				s = br.readLine();
+				if(s == null){break;}
+				else{
+					builder.append("\n");
+				}
+			}
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String section_text = builder.toString();
 		
-		return section_text; 
+		// String path = DXF_Utils.get_absolute_path(textLocation).toString();
+		// String section_text = DXF_Utils.readFile(path,
+		// StandardCharsets.UTF_8);
+
+		return section_text;
 	}
 	public String init(){
 		return init(this.section_name);
