@@ -1,7 +1,9 @@
 package open_dxf_lib;
 
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 public class Color_rgb {
+	DoubleArrayList c;
 	private int r;
 	private int g;
 	private int b;
@@ -10,6 +12,7 @@ public class Color_rgb {
 		set_r(r);
 		set_g(g);
 		set_b(b);
+		c = DoubleArrayList.wrap(new double[] {this.r, this.g, this.b});
 	}
 	
 	public Color_rgb(int[] rgb) {
@@ -40,5 +43,9 @@ public class Color_rgb {
 	public String get_rgb_string(){
 		String rgb = Integer.toString(r) + ", " + Integer.toString(g) + ", " + Integer.toString(b);
 		return rgb;
+	}
+	
+	public DoubleArrayList toListDoubleColor(){
+		return c;
 	}
 }
