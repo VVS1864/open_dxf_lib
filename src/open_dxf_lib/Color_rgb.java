@@ -75,6 +75,9 @@ public class Color_rgb {
 			int_to_float(b)
 			};
 		}
+	public int[] get_rgb(){
+		return new int[]{r ,g, b};
+		}
 	
 	public String get_rgb_string(){
 		String rgb = Integer.toString(r) + ", " + Integer.toString(g) + ", " + Integer.toString(b);
