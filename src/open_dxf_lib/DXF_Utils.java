@@ -4,17 +4,12 @@ package open_dxf_lib;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
 
 public class DXF_Utils {
 
@@ -32,14 +27,20 @@ public class DXF_Utils {
 	
 	
 	public static String replace_values(HashMap<String, String> values, String str){
-		String patternString = "%(" + StringUtils.join(values.keySet(), "|") + ")%";
+		//Create large String from String set with spacer "|"
+		StringBuilder sbStr = new StringBuilder();
+		int i = 0;
+		for (String s: values.keySet()) {
+			i++;
+			sbStr.append(s);
+			if(i<values.size()) {
+				sbStr.append("|");
+			}
+		}
+		
+		String patternString = "%(" + sbStr.toString() + ")%";
 		Pattern pattern = Pattern.compile(patternString);
-		//try{
-		//Matcher matcher = pattern.matcher(str);
-		//}
-		//catch(NullPointerException e){
-		//	System.out.println(str);
-		//}
+		
 		Matcher matcher = pattern.matcher(str);
 		StringBuffer sb = new StringBuffer();
 		while(matcher.find()) {
@@ -79,10 +80,14 @@ public class DXF_Utils {
 		HashMap<String, String> values = new HashMap<String, String>();
 		values.put("x1", "560.00");
 		values.put("x2", "220.00");
+		values.put("xt", "220.00");
+		values.put("x80", "220.00");
+		values.put("gtr6", "2110.00");
 		String str = "ret \n"
 				+ "%x1% \n"
 				+ "%y1% \n"
 				+ "%x2%\n"
+				+ "%gtr6%\n"
 				+ "\n";
 		
 		String str2 = replace_values(values, str);
