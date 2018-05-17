@@ -32,8 +32,8 @@ public class DXF_file {
 	public Section_ENTITIES SECTION_ENTITIES = new Section_ENTITIES();
 	public Section_OBJECTS SECTION_OBJECTS = new Section_OBJECTS();
 
-	public static HashMap<Integer, Color_rgb> dxf_rgb_color_map = new HashMap<>();
-
+	//public HashMap<Integer, Color_rgb> dxf_rgb_color_map = new HashMap<>();
+	public static Color_map color_map = new Color_map();
 	public String file;
 	public Mode mode;
 
@@ -45,7 +45,6 @@ public class DXF_file {
 	public static String handle_block_record_dim_oblique;
 
 	public DXF_file(Mode key, String file) {
-		load_dxf_colors();
 		this.file = file;
 		this.mode = key;
 		if(mode == Mode.Open_file){
@@ -148,58 +147,6 @@ public class DXF_file {
 			int_handle += 1;
 			hex_handle = Integer.toHexString(int_handle).toUpperCase();
 		}
-	}
-
-	/**
-	 * Method for load data of colors dxf-rgb from file to HashMap
-	 */
-	private void load_dxf_colors() {
-		String textLocation = "/color_acad_rgb.txt";
-		//Path path = DXF_Utils.get_absolute_path(textLocation);
-		BufferedReader br = DXF_Utils.read_section(textLocation);
-		String regex = "(\\d*):\\((\\d*),(\\d*),(\\d*)\\),";
-		Pattern pattern = Pattern.compile(regex);
-		String s = "";
-		
-		try {
-			while ((s = br.readLine()) != null) {
-				Matcher matcher = pattern.matcher(s);
-				if (matcher.matches()) {
-					Color_rgb rgb = new Color_rgb(Integer.parseInt(matcher.group(2)), Integer.parseInt(matcher.group(3)),
-							Integer.parseInt(matcher.group(4)));
-					dxf_rgb_color_map.put(Integer.parseInt(matcher.group(1)), rgb);
-					
-				}
-			
-			}
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		
-		/*
-		List<String> stringList;
-		try {
-			stringList = Files.readAllLines(path, StandardCharsets.UTF_8);
-		} catch (IOException e) {
-			e.printStackTrace();
-			return;
-		}
-		String regex = "(\\d*):\\((\\d*),(\\d*),(\\d*)\\),";
-		Pattern pattern = Pattern.compile(regex);
-		for (String s : stringList) {
-			Matcher matcher = pattern.matcher(s);
-			if (matcher.matches()) {
-				Color_rgb rgb = new Color_rgb(Integer.parseInt(matcher.group(2)), Integer.parseInt(matcher.group(3)),
-						Integer.parseInt(matcher.group(4)));
-				dxf_rgb_color_map.put(Integer.parseInt(matcher.group(1)), rgb);
-			}*/
-		
 	}
 
 	public static void main(String[] args) {

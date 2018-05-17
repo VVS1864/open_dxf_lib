@@ -12,7 +12,17 @@ public class DXF_arc extends Section {
 	 * Multiple line string of arc entity for add to SECTION_ENTITIES
 	 */
 	public String dxf_entity;
-
+	/**
+	 * 
+	 * @param x1
+	 * @param y1
+	 * @param R
+	 * @param start angle counterclockwise 
+	 * @param extent angle counterclockwise 
+	 * @param color_rgb
+	 * @param width
+	 */
+	
 	public DXF_arc(double x1, double y1, double R, double start, double extent, Color_rgb color_rgb, int width) {
 		section_name = "entity_arc.txt";
 		body = super.init();
